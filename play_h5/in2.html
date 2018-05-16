@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>520活动-表白❤520</title>
+  <style>
+    body{
+      padding: 0;
+      margin: 0;
+      background: #dddddd;
+    }
+    .iframe{
+      outline: none;
+      border: 0;
+      width: 100%;
+    }
+  </style>
+  <script src="http://libs.baidu.com/jquery/1.10.2/jquery.min.js"></script>
+</head>
+<body>
+
+<iframe src="http://ywfbt.mukzz.pw/dist/index.html#/" class="iframe" id="iframe"></iframe>
+
+<!--矫正iframe的高度-->
+<script>
+  function run_i(){
+    var iframe =  document.getElementById("iframe");
+    iframe.style.height = window.innerHeight-5+"px";
+    setTimeout("run_i()", 1000);
+  }
+  run_i();
+</script>
+
+<script type="application/javascript">
+
+  window.addEventListener("popstate", function() {
+    console.log("监听返回按钮。同时生成第二个展示页面");
+    second_url = "./in3.html?";
+    window.location.replace( second_url);
+  });
+
+  function first_p() {
+    if ("onhashchange" in window) {
+      console.log("该浏览器支持hashchange事件!生成第一个展示页面");
+      first_url = "./in2.html?";
+      var first_page={time:new Date().getTime()};
+      window.history.pushState(first_page, "", first_url);
+    }
+  }
+  first_p();
+
+</script>
+
+
+
+</body>
+</html>

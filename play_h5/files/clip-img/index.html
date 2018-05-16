@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;" name="viewport" />
+    <title>裁剪图片</title>
+    <script type="text/javascript" src="./clipimg.js"></script>
+    <link type="text/css" href="./clipimg.css" rel="stylesheet"/>
+</head>
+<body >
+
+  <div class="box">
+    	<!--开始-裁图区-->
+        <div class="dialog_container_clip width-100-per" style="background-image: url(./sale.png);min-height: 500px;">
+        	<!--放置图片-->
+            <div class="dialog_center_div float-left">
+                <div class="dialog_clip" ></div><!-- 这里放置图片 -->
+            </div>
+       	    <!--按钮区-->
+            <div class="float-left center" style="width: calc(100% - 220px);margin: auto;">
+
+            	<div class="width-100-per margin-bottom-15">
+            		<input id="dialog_picture" onchange="demo_loadFile(this.files)" type="file" style="position:absolute; z-index: -1; visibility: hidden;width: 80px;float: left;" accept="image/*" />
+            		<br>
+	                <label for="dialog_picture" class="clip-btn clip-btn-up hover">上传图片</label><!-- 这个label对应上面的input，这是为了不显示input的文件名和按钮 -->
+	                <div class="clear"></div>
+            	</div>
+            	<div class="width-100-per margin-bottom-15">
+            		<div id="dialog_zoomIn" onclick="demo_zoomIn()" class="clip-btn-btn clip-btn-size hover">放大 +</div>
+	                <div id="dialog_zoomOut" onclick="demo_zoomOut()" class="clip-btn-btn clip-btn-size hover">缩小 -</div>
+	                <div class="clear margin-bottom-15"></div>
+	                <!--<div id="dialog_rotate" onclick="demo_rotate()" class="clip-btn clip-btn-rotate hover">旋转💿</div>-->
+	                <div class="clear"></div>
+            	</div>
+            	<div class="width-100-per margin-bottom-15">
+            		<div id="dialog_ok" onclick="demo_getDataURL()" class="clip-btn clip-btn-ok hover">确认截图</div>
+            		<div class="clear"></div>
+            	</div>
+
+            </div>
+            <div class="clear"></div>
+            <!--预览裁图-->
+            <div class="dialog_center_div">
+                <img class="dialog_clipped_img" src="" /><!-- 这里放置截图后图片 -->
+            </div>
+
+        </div>
+        <!--结束-裁图区-->
+  </div>
+
+<script type="text/javascript" src="./clipimg-self.js"></script>
+</body>
+</html>

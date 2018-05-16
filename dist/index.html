@@ -1,0 +1,193 @@
+<!DOCTYPE html><html><head><meta http-equiv=X-UA-Compatible content="IE=edge,chrome=1"><meta http-equiv=Content-Type content="text/html; charset=utf-8"><meta name=render content=webkit><meta name=screen-orientation content=portrait><meta name=x5-orientation content=portrait><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"><script>!function(a,b){function c(){var b=f.getBoundingClientRect().width;b/i>540&&(b=540*i);var c=b/10;f.style.fontSize=c+"px",k.rem=a.rem=c}var d,e=a.document,f=e.documentElement,g=e.querySelector('meta[name="viewport"]'),h=e.querySelector('meta[name="flexible"]'),i=0,j=0,k=b.flexible||(b.flexible={});if(g){console.warn("将根据已有的meta标签来设置缩放比例");var l=g.getAttribute("content").match(/initial\-scale=([\d\.]+)/);l&&(j=parseFloat(l[1]),i=parseInt(1/j))}else{if(h){var m=h.getAttribute("content");if(m){var n=m.match(/initial\-dpr=([\d\.]+)/),o=m.match(/maximum\-dpr=([\d\.]+)/);n&&(i=parseFloat(n[1]),j=parseFloat((1/i).toFixed(2))),o&&(i=parseFloat(o[1]),j=parseFloat((1/i).toFixed(2)))}}}if(!i&&!j){var p=(a.navigator.appVersion.match(/android/gi),a.navigator.appVersion.match(/iphone/gi)),q=a.devicePixelRatio;i=p?q>=3&&(!i||i>=3)?3:q>=2&&(!i||i>=2)?2:1:1,j=1/i}if(f.setAttribute("data-dpr",i),!g){if(g=e.createElement("meta"),g.setAttribute("name","viewport"),g.setAttribute("content","initial-scale="+j+", maximum-scale="+j+", minimum-scale="+j+", user-scalable=no"),f.firstElementChild){f.firstElementChild.appendChild(g)}else{var r=e.createElement("div");r.appendChild(g),e.write(r.innerHTML)}}a.addEventListener("resize",function(){clearTimeout(d),d=setTimeout(c,300)},!1),a.addEventListener("pageshow",function(a){a.persisted&&(clearTimeout(d),d=setTimeout(c,300))},!1),"complete"===e.readyState?e.body.style.fontSize=12*i+"px":e.addEventListener("DOMContentLoaded",function(){e.body.style.fontSize=12*i+"px"},!1),c(),k.dpr=a.dpr=i,k.refreshRem=c,k.rem2px=function(a){var b=parseFloat(a)*this.rem;return"string"==typeof a&&a.match(/rem$/)&&(b+="px"),b},k.px2rem=function(a){var b=parseFloat(a)/this.rem;return"string"==typeof a&&a.match(/px$/)&&(b+="rem"),b}}(window,window.lib||(window.lib={}));</script><meta name=apple-mobile-web-app-capable content=yes><meta name=apple-touch-fullscreen content=yes><meta content="telephone=no,email=no" name=format-detection><meta name=keywords content=趣味测试><meta name=description content=2652335796@qq.com><title></title><link rel=stylesheet href=http://cdnaliyun.oss-cn-hangzhou.aliyuncs.com/plugins/font-awesome-4.7.0/css/font-awesome.min.css><link href=./static/css/app.c5e2164a5ffed94530b7574f55fbc2b2.css rel=stylesheet></head><body><div id=app><div style="font-size: 20px;color: gray;text-align: center;margin-top: 30px;line-height: 32px;"><i class="fa fa-spinner fa-spin"></i></div><div onclick=ref() style="font-size: 14px;color: lightgray;text-align: center;margin-top: 15px;">若长时间未反应请手动刷新</div><script>function ref() {
+          location.reload();
+        }</script></div><script type=text/javascript src=./static/js/manifest.8bdb3555afadfb279103.js></script><script type=text/javascript src=./static/js/vendor.ed3d97f91fc76e2dc171.js></script><script type=text/javascript src=./static/js/app.4616cba0d040008657c1.js></script></body><script src=http://cdnaliyun.oss-cn-hangzhou.aliyuncs.com/js/jquery-1.11.3.min.js></script><script src="http://pv.sohu.com/cityjson?ie=utf-8"></script><script>//pv
+  function run_item_cal() {
+    var wel_url = window.location.href;
+    var wel_title = document.title;
+    var user_ip = returnCitySN["cip"];
+    var user_city = returnCitySN["cname"];
+
+    //向接口提交数据，并返回后端提示
+    $.ajax({
+      url: "http://qwapi_ywfbt.mukzz.pw/public/?s=/api/welpage/page_cal",
+      type: "POST",
+      //dataType: "json",//已经默认json
+      //async: true,//已经默认true
+      data:{
+        wel_url: wel_url,
+        wel_title: wel_title,
+        user_ip: user_ip,
+        user_city: user_city
+      },
+      success: function(data, status){
+        console.log("浏览数据：" + data+"status："+status);
+      },
+      error: function (xhr) {
+        console.log(xhr);
+      }
+
+    });
+  }
+  //run_item_cal();
+
+  //生成次数的有效统计
+  function run_btn_cal() {
+
+    var wel_url = window.location.href;
+    var wel_title = document.title;
+    var user_ip = returnCitySN["cip"];
+    var user_city = returnCitySN["cname"];
+
+    //向接口提交数据，并返回后端提示
+    $.ajax({
+      url: "http://qwapi_ywfbt.mukzz.pw/public/?s=/api/welpage/btn_cal",
+      type: "POST",
+      //dataType: "json",//已经默认json
+      //async: true,//已经默认true
+      data:{
+        wel_url: wel_url,
+        wel_title: wel_title,
+        user_ip: user_ip,
+        user_city: user_city
+      },
+      success: function(data, status){
+        console.log("有效数据：" + data+"status："+status);
+      },
+      error: function (xhr) {
+        console.log(xhr);
+      }
+
+    });
+  }
+
+  function get_user_ip(){
+    var user_ip = returnCitySN["cip"];
+    console.log(user_ip);
+    return user_ip;
+  }
+
+  //截取url特定 #/ 字符串
+  function run_only(uri_str){
+    const only_num = uri_str.search(/#\//i) //目标前缀onlyid，输出第几位
+    //保留指定位数后面的值
+    ok_str = uri_str.slice(only_num+2)  //截取字符串，
+
+    if(only_num < 0){
+      console.log("链接中没有onlyid键")
+      ok_str = "others"
+    }
+    if(ok_str == ""){
+      console.log("onlyid键为空")
+      ok_str = "ywfbt"
+    }
+
+    console.log('参数：'+ok_str); //目标最终参数，返回xxxxxx
+    return ok_str
+
+  }
+
+  //截取url特定 openid 字符串
+  function run_only_openid(uri_str){
+    const only_num = uri_str.search(/openid=/i) //目标前缀onlyid，输出第几位
+    //保留指定位数后面的值
+    var openid_str = uri_str.slice(only_num+7)  //截取字符串，
+
+    console.log("openid_str="+openid_str);
+
+    if (openid_str.length > 32 || openid_str.length < 27){ //openid_str.length > 32 ||
+      return;
+    }else{
+      console.log('openid参数：'+openid_str); //目标最终参数，返回xxxxxx
+      return openid_str
+    }
+
+  }
+
+  //跳转到微信授权地址，授权成功后返回携带openid参数的h5页面地址
+  // function wxweb(qw_name){
+  //   console.log("跳转")
+  //    var url = "http://tfbfi.pw/tp5/public/index.php?s=/officialnumber/reward_task/quwei_user&qw="+qw_name;
+  //    window.location.replace(url);
+  // }
+
+  function wxok(){
+    console.log("===");
+
+
+    let ok_str2 = window.location.href;
+    ok_str2 = run_only(ok_str2);
+    console.log(ok_str2);
+    var url = "http://tfbfi.pw/tp5/public/index.php?s=/officialnumber/reward_task/quwei_user&qw="+ok_str2;
+    window.location.replace(url);
+
+    return;
+
+    // 微信授权
+    var r=confirm("本活动需要你的微信头像才能生成你的独家结果，是否继续？");
+    if (r==true) {
+      console.log("授权..");
+
+      let ok_str2 = window.location.href;
+      ok_str2 = run_only(ok_str2);
+      console.log(ok_str2);
+      //return;
+      //wxweb(ok_str2);
+      var url = "http://tfbfi.pw/tp5/public/index.php?s=/officialnumber/reward_task/quwei_user&qw="+ok_str2;
+      window.location.replace(url);
+
+    }else {
+      console.log("取消了授权");
+      return;
+    }
+  }
+
+  //请求用户数据
+  // function req_wxinfo(openid){
+  //
+  //   var j_url = "http://qwapi_ywfbt.mukzz.pw/public/?s=/api/wxweb/user_info/openid/"+openid;
+  //
+  //   console.log("j_url="+j_url);
+  //
+  //   $.getJSON(j_url, function(dataObj, status){
+  //
+  //     var head_img = dataObj.headimgurl;
+  //     console.log("head_img=html="+head_img);
+  //
+  //     return head_img;
+  //
+  //   });
+  // }</script><script>//设置cookie
+  function setCookie(c_name,value,expiredays) {
+
+    console.log("存cookie")
+
+    var exdate=new Date()
+    exdate.setDate(exdate.getDate()+expiredays)
+    document.cookie=c_name+ "=" +escape(value)+
+      ((expiredays==null) ? "" : ";expires="+exdate.toGMTString())
+  }
+
+  //检查和读取cookie，并返回cookie值或者空
+  function getCookie(c_name) {
+
+    console.log("匹配cookie键，返回cookie值")
+
+    if (document.cookie.length>0)
+    {
+      c_start=document.cookie.indexOf(c_name + "=")
+      if (c_start!=-1)
+      {
+        c_start=c_start + c_name.length+1
+        c_end=document.cookie.indexOf(";",c_start)
+        if (c_end==-1) c_end=document.cookie.length
+        return unescape(document.cookie.substring(c_start,c_end))
+      }
+    }
+    return ""
+  }</script><script>var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?6659ceb24a1f77985323a27f264c73f9";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+  })();</script></html>

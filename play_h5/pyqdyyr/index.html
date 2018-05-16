@@ -1,0 +1,210 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
+	<meta name="format-detection" content="telephone=no">
+	<title>我的有缘人</title>
+	<link rel="stylesheet" type="text/css" href="assets/css/4css.css">
+	<script type="text/javascript" src="assets/js/jquery-1.10.1.js"></script>
+    <style>
+        .qr{
+            margin-top: -80px;
+            text-align: right;
+        }
+        .qr_img{
+            margin-left: 10px;
+        }
+    </style>
+
+</head>
+<body onLoad="init()">
+
+	<!--开始-输入区-->
+	<div class="background">
+
+	  	<div class="name">
+	  		<span class="write-name">
+	    		<input class="user-name" maxlength="4" onBlur="checkName()" type="text" placeholder="输入中文名">
+	    	</span>
+	  	</div>
+
+		<div class="gender">
+		    <label>
+			    <span><div></div></span>
+			    <input type="radio" name="gender" value="男">我是男生♂
+			</label>
+
+			<label style="text-align:right;">
+			    <span><div></div></span>
+			    <input type="radio" name="gender" value="女">我是女生♀
+		    </label>
+		</div>
+
+	  	<div class="birthday"> <span class="title">生日</span>
+	  		<span class="chose-birthday">
+	    		<input readonly placeholder="请选择出生日期" class="user-birthday" id="user_birthday" type="text">
+	    	</span>
+	  	</div>
+	  	<div class="shengao"> <span class="title">身高</span>
+	  		<span class="chose-birthday">
+			    <select id="shengao" placeholder="请选择出生日" onChange="this.value!='请选择身高'?this.style.color='#000':this.style.color='#a9a9a9'">
+			      	<option value="请选择身高">请选择身高</option>
+			    </select>
+		    </span>
+	  	</div>
+	  	<div  class="button" onClick="makePicture()">寻找我的有缘人</div>
+
+	</div>
+	<!--结束-输入区-->
+
+
+	<div class="transparent-float"></div>
+
+	<!--开始-结果通知-->
+	<div class="float">
+		 <div style="width: 1353.6px; height: 1748.4px; margin-left:7.5%; margin-top:10px; position: relative;" class="picture-box">
+
+		  	<span class="close" onClick="closeFloat()"></span>
+		  	<span style="width: 1299.46px; height: 1537.69px; position: absolute; z-index: 1; bottom: 2%; left: 2%;" class="picture">
+                <!--显示图片结果-->
+		  		<img class="mypicture" id="mypicture"  border="0" src="">
+                <!--二维码base64合成辅助区域-->
+                <div class="qr" id="qr" ></div>
+		  	</span>
+		  	<span style="width: 1299.46px; height: 1537.69px; position: absolute; z-index: 2; top: 2%; left: 2%;" class="scan"></span>
+
+		 </div>
+		 <div class="text"><img src="assets/assets/4.png"></div>
+		<!--<div class="more" onClick="window.location.href='#'">这里可以添加一条广告</div>-->
+	</div>
+	<!--结束-结果通知-->
+
+    <!--生成二维码-->
+    <script type="text/javascript" src="assets/js/qrcode.js"></script>
+
+	<!--年月日插件-->
+	<script type="text/javascript" src="assets/js/hs_mobiscroll_date.js"></script>
+	<script type="text/javascript" src="assets/js/hs_mobiscroll.js"></script>
+
+    <script type="text/javascript">
+		$(function () {
+
+			var currYear = new Date().getFullYear();
+			var opt={};
+			opt.date = {preset : 'date'};
+			opt.default = {
+				theme: 'android-ics light',
+				display: 'bottom',
+				mode: 'scroller',
+				dateFormat: 'yyyy-mm-dd',
+				lang: 'zh',
+				showNow: false,
+				startYear: currYear - 50,
+				endYear: currYear
+			};
+
+			$("#user_birthday").mobiscroll($.extend(opt['date'], opt['default']));
+
+		});
+
+		$(".gender label").click(function(){
+
+			$(".gender div").removeClass("hover")
+			$("span div",this).addClass("hover").siblings().removeClass("hover")
+			$("input",this).attr("checked","checked")
+			$(this).siblings().children("input").removeAttr("checked");
+
+		})
+
+		for(i=150;i<=200;i++){
+
+			$("#shengao").append("<option value='"+i+"'>"+i+"</option>");
+
+		}
+
+
+	</script>
+
+	<script type="text/javascript">
+		function vgender(){
+
+			var radio=document.getElementsByName("gender");
+			if((radio[0].checked==false)&&(radio[1].checked==false))
+			alert("请先选择性别！");
+
+		}
+	</script>
+
+	<script type="text/javascript" src="assets/js/self.js"></script>
+  <script src="http://pv.sohu.com/cityjson?ie=utf-8"></script>
+
+  <script>
+
+
+    //pv
+    function run_item_cal() {
+      var wel_url = window.location.href;
+      var wel_title = document.title;
+      var user_ip = returnCitySN["cip"];
+      var user_city = returnCitySN["cname"];
+
+      //向接口提交数据，并返回后端提示
+      $.ajax({
+        url: "http://qwapi.mukzz.pw/public/?s=/api/welpage/page_cal",
+        type: "POST",
+        //dataType: "json",//已经默认json
+        //async: true,//已经默认true
+        data:{
+          wel_url: wel_url,
+          wel_title: wel_title,
+          user_ip: user_ip,
+          user_city: user_city
+        },
+        success: function(data, status){
+          console.log("浏览数据：" + data+"status："+status);
+        },
+        error: function (xhr) {
+          console.log(xhr);
+        }
+
+      });
+    }
+    run_item_cal()
+
+    //生成次数的有效统计
+    function run_btn_cal() {
+      var wel_url = window.location.href;
+      var wel_title = document.title;
+      var user_ip = returnCitySN["cip"];
+      var user_city = returnCitySN["cname"];
+
+      //向接口提交数据，并返回后端提示
+      $.ajax({
+        url: "http://qwapi.mukzz.pw/public/?s=/api/welpage/btn_cal",
+        type: "POST",
+        //dataType: "json",//已经默认json
+        //async: true,//已经默认true
+        data:{
+          wel_url: wel_url,
+          wel_title: wel_title,
+          user_ip: user_ip,
+          user_city: user_city
+        },
+        success: function(data, status){
+          console.log("有效数据：" + data+"status："+status);
+        },
+        error: function (xhr) {
+          console.log(xhr);
+        }
+
+      });
+    }
+
+  </script>
+
+</body>
+</html>

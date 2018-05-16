@@ -1,0 +1,147 @@
+
+html, body{
+    width: 100%;
+    height: 100%;
+    margin: 0px;
+    background-color: #eeeeee;
+}
+
+.hide{
+	display: none;
+}
+.float-left{
+	float: left;
+}
+.clear{
+	clear: both;
+}
+.block{
+	display: block !important;
+}
+.width-100-per{
+	width: 100%;
+}
+.clip-btn{
+	/*width: 100%;*/
+	/*text-align: center;*/
+	display: inline-block;
+
+}
+.margin-bottom-15{
+	margin-bottom: 30px;
+}
+.clip-btn-btn{
+	width: 50px;
+	display: inline-block;
+}
+.center{
+	text-align: center;
+}
+.clip-btn-ok{
+	background: #1E90FF;
+	font-size: 15px;
+	color: white;
+	padding: 5px 30px;
+	border-radius: 50px;
+
+}
+.clip-btn-up{
+	background: grey;
+	font-size: 15px;
+	color: white;
+	padding: 5px 30px;
+	border-radius: 50px;
+}
+.clip-btn-size{
+	background: gray;
+	font-size: 15px;
+	color: white;
+	padding: 5px 10px;
+	border-radius: 50px;
+}
+.clip-btn-rotate{
+	background: gray;
+	font-size: 15px;
+	color: white;
+	padding: 5px 30px;
+	border-radius: 50px;
+}
+.hover{
+	cursor: pointer;
+
+}
+.hover:active{
+	opacity: 0.8;
+}
+
+
+/*外层包装容器*/
+.dialog, .dialog_mask, .dialog_wrap{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.dialog_container_clip{
+    display: table;
+    padding:10px 0px 20px 0px;
+}
+
+/*横向居中容器*/
+.dialog_center_div{
+    display: table;
+    margin:auto;
+    margin-left: 10px;
+}
+
+/*截图窗口大小*/
+.dialog_clip{
+    width: 200px;
+    height: 200px;
+}
+
+/*效果展示窗口*/
+.dialog_clipped_img{
+    margin-top: 10px;
+}
+
+/*按钮区样式*/
+.dialog_buttons{
+    margin-top: 20px;
+}
+
+.dialog_button{
+    display: inline;
+    font-size: 14px;
+    color: #555555;
+    background-color: #FFD275;
+    padding: 5px 20px 5px 20px;
+    margin: 0px 10px 0px 10px;
+}
+
+.dialog_button:hover{
+    cursor: pointer;
+}
+
+.dialog_button:active{
+    background-color: #D3A031;
+}
+
+
+@media only screen and (min-width: 781px) {
+  .box{
+    width: 780px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+@media only screen and (min-width: 290px) and (max-width: 780px) {
+  .box{
+    width: 100%;
+  }
+}
+@media only screen and (max-width: 289px) {
+  .box{
+    width: 300px;
+  }
+}

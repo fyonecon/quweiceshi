@@ -1,0 +1,66 @@
+@import "./variabel";
+
+
+body, html{
+  line-height: 1;
+  font-family: 'PingFang SC', 'STHeitiSC-Light', 'Helvetica-Light', arial, sans-serif, 'Droid Sans Fallback';
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  font-size: 100%;
+  background: #f8f8f8;
+}
+
+input{
+  font-family: 'PingFang SC', 'STHeitiSC-Light', 'Helvetica-Light', arial, sans-serif, 'Droid Sans Fallback';
+}
+
+.scroll{
+  position: fixed;
+  top:0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  overflow: hidden;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s;
+}
+
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+}
+
+.slide-up-enter-active,
+.slide-up-leave-active {
+  transition: all 0.5s;
+}
+
+.slide-up-enter,
+.slide-up-leave-to {
+  opacity: 0;
+  transform: translateY(100%);
+}
+
+@keyframes scale {
+  0% {
+    transform: scale(0.98);
+  }
+  50% {
+    transform: scale(1.02);
+  }
+  100% {
+    transform: scale(0.98);
+  }
+}
+
+.mint-msgbox-btn{
+  font-size: 18px;
+}
+
+.mint-indicator-wrapper,.mint-indicator-mask{
+  z-index: 999;
+}

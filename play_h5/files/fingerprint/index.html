@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=0">
+	<title>指纹❤蜜码小测试</title>
+	<!--公共css-->
+	<link rel="stylesheet" href="css/common.css" />
+	<!--自定义css-->
+	<link rel="stylesheet" href="css/self.css" />
+	<link rel="stylesheet" href="css/animate.min.css" />
+	<script src="http://cdnaliyun.oss-cn-hangzhou.aliyuncs.com/js/jquery-1.11.3.min.js"></script>
+	<script src="http://cdnaliyun.oss-cn-hangzhou.aliyuncs.com/js/qrcode.js"></script>
+	<script src="http://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+	<script src="http://pv.sohu.com/cityjson?ie=utf-8"></script>
+</head>
+<body  oncontextmenu="return false" onselectstart="return false">
+	
+	<!--开始-录入内容-->
+	<div class="ok">
+	<div class="container">
+		<div class="absolute-9999 left-0 top-0 content height-100-per bg-white bg-img-big">
+			<div class="relative">
+				<div class="absolute-99999">
+					<div class="img-div">
+						<img src="img/title.png" class="img-one">
+						<div class="clear"></div>
+					</div>
+					<div class="txt-box">
+						<div class="txt-div">亲爱的~</div>
+						<div class="txt-div">注定的缘分需要“注定的”的手指，Ta是你的天赐良缘吗？</div>
+						<div class="txt-div">伸出你和Ta的手指一起测测吧！</div>
+					</div>
+					<div class="finger-box">
+						<div class="finger-div center">
+							<img src="img/finger2.png" class="finger-img finger-xy" id="finger-xy"/>
+							<br />
+							<img src="img/xy.png" class="love-img"/>
+						</div>
+						<div class="finger-div center">
+							<img src="img/finger2.png" class="finger-img finger-xx" id="finger-xx"/>
+							<br />
+							<img src="img/xx.png" class="love-img"/>
+						</div>
+						<div class="clear"></div>
+					</div>
+					<div class="text-box">
+						亲，将你们的手指放到指纹的区域吖~要拉手指哦，“指”不到位，结果不准哦~
+					</div>
+					
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="layer"></div>
+	<div class="layer-btn animated">获取结果</div>
+	</div>
+	<!--结束-录入内容-->
+	
+	<!--开始-展示结果-->
+	<div class="res-box hide" onclick="res_box()">
+		<!--结果-->
+		<!--图-->
+		<div>
+			<img class="qr hide" id="qr" style="width: 300px;"/>
+		</div>
+		<!--html-->
+		<div id="qr-zoon" class="res-txt" style="background:url(img/bg3.png) no-repeat;background-size:100% 370px;">
+			<div style="height: 10px;">&nbsp;</div>
+			<div style="padding: 0px 10px;height: 240px;">
+				<div class="qr-zoon" >
+					<div class="card-box" style="padding-top: 10px;">匹配结果</div>
+					<div class="per-div per-margin-bottom">匹配度：<span class="per">-</span></div>
+					<div class="per-margin-bottom">
+						<div style="width: 300px;height: 10px;border-radius: 10px;background: white;position: relative;">
+							<div class="progress" style="min-width: 30px;position: absolute;top: 0px;
+							left: 0px;background: #23A3EB;height: 10px;border-radius: 10px;"></div>
+						</div>
+					</div>
+					<div class="per-margin-bottom" style="border-bottom: dotted 1px white;"></div>
+					<div class="title-div per-margin-bottom2">匹配类型：<span class="title">-</span></div>
+					<div class="txt per-margin-bottom">-</div>
+				</div>
+			</div>
+			<!--二维码-->
+			<div style="text-align: right;">
+				<div id="qrcode" class="qrcode"></div>
+			</div>
+			<div class="" style="color: white;letter-spacing: 1px;font-size: 10px;margin-top: 10px;padding-right: 10px;text-align: right;">
+				✔&nbsp;长按可识别二维码
+			</div>
+		</div>
+		
+		
+	</div>
+	<!--结束-展示结果-->
+	
+	<!--提示-->
+	<div class="toast toast hide">正在生成结果..</div>
+	
+	<script type="text/javascript">
+		var url = "http://qwapi_ywfbt.mukzz.pw/public/?s=/api/jump/jp";
+		var user_ip = returnCitySN["cip"];
+		
+		var url_n = "/p/"+"fingerprint"+"/ip/"+user_ip;
+		
+		var qrcode = new QRCode(document.getElementById("qrcode"), {
+			text: url+url_n,
+			width: 70,
+			height: 70,
+			colorDark : "#000000",
+			colorLight : "#ffffff",
+			correctLevel : QRCode.CorrectLevel.L
+		});
+	</script>
+	
+	<script>
+		
+		//html2canvas
+		function run_qr(){
+			html2canvas($("#qr-zoon")[0], {
+				scale:2,
+				logging:false,
+				useCORS:true,
+				backgroundColor:null // 让背景透明
+			})
+			.then(function(canvas) {
+				console.log("生成图片");
+		        var dataUrl = canvas.toDataURL();  
+		        $("#qr").attr("src",dataUrl).removeClass("hide");
+		        $("#qr-zoon").addClass("hide");
+	        });
+		}
+		
+	</script>
+	
+	<!--指纹及其结果计算-->
+	<script>
+		/*
+		 *  思路：
+		 	      根据触点的位置坐标x-y进行取值匹配，并不能取到什么┏┛墓┗┓...(((m -__-)m指纹))
+		
+		 *  以下进行指纹及其结果的操作 
+		 * */
+		
+		var x = 0; // 触点x坐标
+		var y = 0; // 触点y坐标
+		var f_res = 0; // 坐标y-x的绝对值
+		var r = 0; // 对应第几个测试结果
+		
+		//通过尽可能多的运行finger()实现按指纹(按压坐标)取值 1/4
+		$(function(){
+			
+			$(".layer").hover(function(event){
+	            finger()
+			})
+			$(".layer").click(function(){
+				finger()
+			});
+			$(".finger-xy").mouseover(function(){
+				finger()
+			});
+			$(".finger-xx").mouseover(function(){
+				finger()
+			});
+			
+			//计算测试结果
+			$(".layer-btn").click(function(){
+				cal_finger()
+				run_btn_cal()
+			});
+			
+		});
+		
+		//获取按压屏幕坐标 2/4
+		function finger(){
+			
+			var e = event || window.event;
+            var scrollX = document.documentElement.scrollLeft || document.body.scrollLeft;
+            var scrollY = document.documentElement.scrollTop || document.body.scrollTop;
+            
+            x = e.pageX || e.clientX + scrollX;
+            y = e.pageY || e.clientY + scrollY;
+            
+            f_res = Math.abs(y - x); // 取绝对值
+            //console.log(f_res);
+            
+            if(f_res < 220 && f_res > 80){
+				console.log("B")
+				r = Math.ceil(f_res/30) // 值越小，对应结果越好
+				console.log(r)
+			}
+			if(f_res < 79 && f_res > 0){
+				console.log("A")
+				r = Math.ceil(f_res/30) // 值越小，对应结果越好
+				console.log(r)
+			}
+            
+		}
+		
+		
+		//处理指纹无效时的各种状况 3/4
+		function cal_finger(){
+			if(f_res == 0){
+				alert("指纹无效，请重按压")
+				f_res = 1;
+				r = 0;
+				return;
+			}
+			
+			if(r>7){ //判断r超过json取值的范围
+				r = 7;
+			}
+			
+			$(".toast").removeClass("hide");
+			setTimeout("cal_res(r)", 2000);
+			
+		}
+		
+		//处理就算结果 4/4
+		function cal_res(num){
+			console.log("json")
+			
+			$(".toast").addClass("hide animated fadeOut");
+			$(".res-box").removeClass("hide").addClass("animated slideInDown");
+			
+			var tran_url = "test.json"; // json的网络地址
+			$.getJSON(tran_url, function(dataObj, status){
+				console.log(status);
+				
+				var j = num;
+				var _per = dataObj[j].per;
+				
+				// 百分比转小数进行乘除运算
+				switch(_per)
+				{
+				case "65%":
+				 	_per = .65*300;
+				  	break;
+				case "75%":
+				 	_per = .75*300;
+				  	break;
+				case "80%":
+				 	_per = .80*300;
+				  	break;
+				  	
+				case "85%":
+				 	_per = .85*300;
+				  	break;
+				
+				case "90%":
+				 	_per = .90*300;
+				  	break;
+				case "95%":
+				 	_per = .95*300;
+				  	break;
+				
+				case "100%":
+				 	_per = 1.00*300;
+				  	break;  	
+				  	
+				}			
+				
+				// 最后的结果显示操作 
+				$(".per").html(dataObj[j].per);
+				$(".progress").css("width", _per); // 进度条
+				$(".title").html(dataObj[j].title);
+				$(".txt").html(dataObj[j].txt);
+				
+				run_qr();
+				
+			});
+		}
+		
+		// 点击空白处遮蔽层关闭结果显示
+		function res_box(){
+			$(".res-box").addClass("hide");
+			$(".res-txt").removeClass("hide");
+		}
+		
+		
+	</script>
+	
+	<!--其他辅助功能-->
+	<script>
+		
+		//判断是否在微信浏览器当中，进行跳转拦截操作
+		function is_weixn(){  
+		    var ua = navigator.userAgent.toLowerCase();  
+		    if(ua.match(/MicroMessenger/i)=="micromessenger") {
+		        return true;  
+		    } else { 
+		    	alert("没有在微信当中浏览页面！");
+		    	//window.location.replace("https://search.yahoo.com");
+		        return false;  
+		    }  
+		}  
+		is_weixn();
+		
+		//底部按钮循环动画
+		function ani(){
+			if($(".layer-btn").hasClass("pulse")){
+				$(".layer-btn").removeClass("pulse")
+			}else{
+				$(".layer-btn").addClass("pulse")
+			}
+			setTimeout("ani()", 2000);
+		}
+		ani();
+		
+		//统计
+		var _hmt = _hmt || [];
+		(function() {
+		    var hm = document.createElement("script");
+		    hm.src = "https://hm.baidu.com/hm.js?6659ceb24a1f77985323a27f264c73f9";
+		    var s = document.getElementsByTagName("script")[0];
+		    s.parentNode.insertBefore(hm, s);
+		})();
+		
+	</script>
+	
+	
+	<script>
+		
+		//pv
+		  function run_item_cal() {
+		    var wel_url = window.location.href;
+		    var wel_title = document.title;
+		    var user_ip = returnCitySN["cip"];
+		    var user_city = returnCitySN["cname"];
+		
+		    //向接口提交数据，并返回后端提示
+		    $.ajax({
+		      url: "http://qwapi_ywfbt.mukzz.pw/public/?s=/api/welpage/page_cal",
+		      type: "POST",
+		      //dataType: "json",//已经默认json
+		      //async: true,//已经默认true
+		      data:{
+		        wel_url: wel_url,
+		        wel_title: wel_title,
+		        user_ip: user_ip,
+		        user_city: user_city
+		      },
+		      success: function(data, status){
+		        console.log("浏览数据：" + data+"status："+status);
+		      },
+		      error: function (xhr) {
+		        console.log(xhr);
+		      }
+		
+		    });
+		  }
+		  run_item_cal();
+		  
+		//生成次数的有效统计
+		  function run_btn_cal() {
+		
+		    var wel_url = window.location.href;
+		    var wel_title = document.title;
+		    var user_ip = returnCitySN["cip"];
+		    var user_city = returnCitySN["cname"];
+		
+		    //向接口提交数据，并返回后端提示
+		    $.ajax({
+		      url: "http://qwapi_ywfbt.mukzz.pw/public/?s=/api/welpage/btn_cal",
+		      type: "POST",
+		      //dataType: "json",//已经默认json
+		      //async: true,//已经默认true
+		      data:{
+		        wel_url: wel_url,
+		        wel_title: wel_title,
+		        user_ip: user_ip,
+		        user_city: user_city
+		      },
+		      success: function(data, status){
+		        console.log("有效数据：" + data+"status："+status);
+		      },
+		      error: function (xhr) {
+		        console.log(xhr);
+		      }
+		
+		    });
+		  }
+		
+		
+	</script>
+	
+	
+</body>
+</html>
